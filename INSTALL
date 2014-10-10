@@ -1,0 +1,54 @@
+The Database Structure
+======================
+
+Before use application, need to first create a database based on the 
+information below:
+
+CREATE TABLE IF NOT EXISTS `url_shortener_list` (
+`id` int(10) unsigned NOT NULL,
+  `alias` varchar(5) NOT NULL,
+  `hash` varchar(32) NOT NULL,
+  `url` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `url_shortener_list`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `alias` (`alias`), ADD UNIQUE KEY `hash` (`hash`);
+
+
+Configuration
+=============
+
+Need to configure application. Update to the configuration file:
+
+/path/to/<host_name>/App/config/db.php
+
+...
+	'host'=> '<host>', // What host to connect to, defaults to localhost/
+	'dbname' => '<dbname>', // The name of the database to user.
+	'username' => '<username>', // Connect to the database as this username.
+	'password' => '<password>', // Password associated with the username.
+	'charset' => 'utf8' // Sets the client character set.
+...
+
+Create a virtual host
+=====================
+
+Within  httpd.conf, you will need to do two things.
+1.  ensure that the NameVirtualHost is defined; typically, 
+you will set it to a value of "*:80".
+2. define a virtual host:
+
+    <VirtualHost *:80>
+        ServerName <host_name>.local
+        DocumentRoot /path/to/<host_name>/public_html
+     
+        <Directory /path/to/<host_name>/public_html>
+			RewriteEngine on
+			RewriteCond %{REQUEST_FILENAME} !-f
+			RewriteCond %{REQUEST_FILENAME} !-d
+			RewriteRule . index.php
+        </Directory>
+    </VirtualHost>
+
+Note that the DocumentRoot setting specifies the public subdirectory of our project;
+this means that only files under that directory can ever be served directly by the server. 
