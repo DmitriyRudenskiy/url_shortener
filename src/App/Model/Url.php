@@ -28,7 +28,7 @@ class Url
 	}
 
 	/**
-	 * Get the url of the alias
+	 * Get the url of the alias.
 	 * 
 	 * @param string $alias
 	 * @return string
@@ -51,13 +51,13 @@ class Url
 			return $result['url'];
 		}
 	}
-	
-	/**
-	 * Get the alias address
-	 * 
-	 * @param string $url
-	 * @return string
-	 */
+
+    /**
+     * Get the alias address.
+     *
+     * @param Item $itemUrl
+     * @return string|null
+     */
 	public function getAlias(Item $itemUrl)
 	{
 
@@ -79,7 +79,7 @@ class Url
 	}
 	
 	/**
-	 * Add new row
+	 * Add new row.
 	 * 
 	 * @param Item $itemUrl
 	 */
@@ -90,6 +90,6 @@ class Url
 		$sql = "INSERT INTO `url_shortener_list` (`alias`, `hash`, `url`)
 				VALUES (:alias, :hash, :url)";
 	
-		return $this->_db->insert($sql, $params);
+		$this->_db->insert($sql, $params);
 	}
 }

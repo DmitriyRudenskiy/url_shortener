@@ -30,6 +30,8 @@ class Index
 	
 	/**
 	 * Form
+     *
+     * @throws \RuntimeException
 	 */
 	public function formAction()
 	{
@@ -61,7 +63,7 @@ class Index
 	}
 	
 	/**
-	 * Not found URL
+	 * Not found URL.
 	 */
 	public function errorAction()
 	{
@@ -70,7 +72,7 @@ class Index
 	}
 	
 	/**
-	 * Redirect to another URL
+	 * Redirect to another URL.
 	 *
 	 * @param string $url
 	 */
@@ -86,7 +88,7 @@ class Index
 	}
 	
 	/**
-	 * Processing a request for adding
+	 * Processing a request for adding.
 	 */
 	protected function _addNewUrl($url)
 	{
@@ -105,8 +107,7 @@ class Index
 		if (empty($alias)) {
 			do {
 				$url = $this->_model->getUrl($itemUrl->getAlias());
-	
-				// regenerate alias
+
 				if (!empty($url)) {
 					$itemUrl->regenerateAlias();
 				}
@@ -114,7 +115,6 @@ class Index
 			} while (!empty($url));
 			
 			$this->_model->add($itemUrl);
-			
 			$alias = $itemUrl->getAlias();
 		}
 		
@@ -122,7 +122,7 @@ class Index
 	}
 	
 	/**
-	 * Create shorter URL
+	 * Create shorter URL.
 	 * 
 	 * @param string $alias
 	 * @return string
@@ -138,7 +138,7 @@ class Index
 	}
 	
 	/**
-	 * Send response
+	 * Send response.
 	 * 
 	 * @param string $response
 	 */

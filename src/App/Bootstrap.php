@@ -23,7 +23,8 @@ class Bootstrap
 	}
 	
 	/**
-	 * Initialize data bases
+	 * Initialize data bases.
+     *
 	 * @throws \RuntimeException
 	 */
 	protected function _initDb()
@@ -32,11 +33,11 @@ class Bootstrap
 			throw new \RuntimeException('Not setup "BASE_PATH"');
 		}
 		
-		Db::setConect(include BASE_PATH . '/App/config/db.php');
+		Db::setConnect(include BASE_PATH . '/App/config/db.php');
 	}
 	
 	/**
-	 * Run the application
+	 * Run the application.
 	 */
 	public function run()
 	{

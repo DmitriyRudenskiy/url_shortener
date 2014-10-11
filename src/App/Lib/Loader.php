@@ -32,10 +32,11 @@ class Loader
 
 	/**
 	 * Loads a class from a PHP file.
-	 * 
-	 * @param string $className
+	 *
+     * @param string $class
 	 * @return boolean
-	 */
+     * @throws \InvalidArgumentException
+     */
 	public function loadClass($class)
 	{
 		if (!is_string($class) || empty($class)) {
